@@ -1,0 +1,52 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ZORTAX Creator</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#090b13;color:white;font-family:Arial,sans-serif}
+header{padding:24px 18px;background:#111526;border-bottom:1px solid #292f46}
+.logo{font-size:27px;font-weight:900;color:#a78bfa}
+.logo span{color:white}
+main{max-width:650px;margin:30px auto;padding:18px}
+h1{font-size:30px}
+p{color:#aeb5ca;line-height:1.6}
+.panel{background:#141a2b;border:1px solid #303750;border-radius:17px;padding:20px;margin-top:20px}
+input{width:100%;padding:16px;border-radius:10px;border:1px solid #454d67;background:#090e1b;color:white;font-size:15px;margin:12px 0}
+button{width:100%;padding:16px;border:0;border-radius:10px;background:#8b5cf6;color:white;font-size:16px;font-weight:bold;cursor:pointer}
+button:disabled{opacity:.5}
+.note{font-size:12px;color:#8992ab}
+#result{margin-top:20px;white-space:pre-wrap;color:#d9d5ff;line-height:1.7}
+footer{text-align:center;color:#707991;padding:35px;font-size:12px}
+</style>
+</head>
+<body>
+<header><div class="logo">ZORTAX <span>CREATOR</span></div></header>
+<main>
+<h1>Videolarını kısa kesitlere dönüştür! 🚀</h1>
+<p>Uzun videolarından TikTok, Reels ve YouTube Shorts için kısa içerikler hazırla.</p>
+<div class="panel">
+<h3>🎬 YouTube video bağlantısı</h3>
+<input id="url" placeholder="YouTube bağlantısını buraya yapıştır">
+<button id="btn" onclick="analyze()">Videoyu analiz et</button>
+<div id="result"></div>
+</div>
+<p class="note">ZORTAX Creator – İlk sürüm 0.1</p>
+</main>
+<footer>© 2026 ZORTAX Creator</footer>
+<script>
+function analyze(){
+const url=document.getElementById('url').value.trim();
+const result=document.getElementById('result');
+if(!url.includes('youtube.com/')&&!url.includes('youtu.be/')){
+result.textContent='Geçerli bir YouTube bağlantısı gir knk!';
+return;
+}
+result.textContent='Bağlantı alındı! 🎉\\n\\nBu ilk sürüm henüz videoyu işleyemiyor. Otomatik kesit motorunu bir sonraki aşamada bağlayacağız.';
+}
+</script>
+</body>
+</html>
