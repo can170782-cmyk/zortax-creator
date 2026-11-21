@@ -7,12 +7,12 @@
 <title>ZORTAX Creator</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:#090b13;color:white;font-family:Arial;display:flex;align-items:center;justify-content:center;padding:20px}
+body{margin:0;min-height:100vh;background:#090b13;color:white;font-family:Arial,sans-serif;display:flex;align-items:center;justify-content:center;padding:20px}
 .container{width:100%;max-width:480px;background:#141827;border:1px solid #292f43;border-radius:22px;padding:28px 22px;box-shadow:0 15px 50px #0008}
 .logo{text-align:center;font-size:36px;font-weight:900;letter-spacing:3px;color:#8b7cff}
 .subtitle{text-align:center;color:#aab0c5;margin:10px 0 28px}
-h2{font-size:18px;margin-bottom:10px}
-input,select{width:100%;padding:15px;margin:8px 0 18px;border:1px solid #343b52;border-radius:12px;background:#0c1020;color:white;font-size:15px}
+h2{font-size:17px;margin-bottom:10px}
+input{width:100%;padding:15px;margin:8px 0 18px;border:1px solid #343b52;border-radius:12px;background:#0c1020;color:white;font-size:15px}
 button{width:100%;padding:16px;border:0;border-radius:12px;background:linear-gradient(135deg,#7565ff,#a34dff);color:white;font-size:17px;font-weight:bold}
 button:disabled{opacity:.6}
 #result{margin-top:18px;padding:14px;border-radius:10px;background:#0c1020;color:#ddd;text-align:center;overflow-wrap:anywhere;line-height:1.5}
@@ -27,13 +27,8 @@ button:disabled{opacity:.6}
 <h2>YouTube bağlantısını yapıştır</h2>
 <input id="url" type="url" placeholder="https://youtu.be/...">
 
-<h2>Altyazı seçimi</h2>
-<select id="subtitle">
-<option value="no">Altyazısız</option>
-<option value="yes">Altyazılı (yakında)</option>
-</select>
-
 <button id="prepareBtn" onclick="prepareVideo()">VİDEOYU HAZIRLA</button>
+
 <div id="result">ZORTAX motoru hazır.</div>
 <div class="info">Dikey 9:16 video · Bulanık arka plan · MP4 çıktı</div>
 </div>
@@ -50,16 +45,13 @@ return;
 }
 
 button.disabled=true;
-result.textContent="⏳ Motor başlatılıyor. Video hazırlanıyor...";
+result.textContent="⏳ Video indiriliyor ve hazırlanıyor. Lütfen bekle...";
 
 try{
 const response=await fetch("https://zortax-creator.onrender.com/process",{
 method:"POST",
 headers:{"Content-Type":"application/json"},
-body:JSON.stringify({
-url:url,
-subtitle:document.getElementById("subtitle").value
-})
+body:JSON.stringify({url:url})
 });
 
 if(!response.ok){
@@ -94,3 +86,4 @@ button.disabled=false;
 </script>
 </body>
 </html>
+
