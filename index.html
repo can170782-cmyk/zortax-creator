@@ -7,45 +7,86 @@
 <title>ZORTAX Creator</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;background:#090b13;color:white;font-family:Arial,sans-serif}
-header{padding:24px 18px;background:#111526;border-bottom:1px solid #292f46}
+body{margin:0;background:#090b13;color:white;font-family:Arial}
+header{padding:24px;background:#111526;border-bottom:1px solid #292f46}
 .logo{font-size:27px;font-weight:900;color:#a78bfa}
 .logo span{color:white}
 main{max-width:650px;margin:30px auto;padding:18px}
-h1{font-size:30px}
+h1{font-size:29px}
 p{color:#aeb5ca;line-height:1.6}
 .panel{background:#141a2b;border:1px solid #303750;border-radius:17px;padding:20px;margin-top:20px}
 input{width:100%;padding:16px;border-radius:10px;border:1px solid #454d67;background:#090e1b;color:white;font-size:15px;margin:12px 0}
-button{width:100%;padding:16px;border:0;border-radius:10px;background:#8b5cf6;color:white;font-size:16px;font-weight:bold;cursor:pointer}
-button:disabled{opacity:.5}
-.note{font-size:12px;color:#8992ab}
-#result{margin-top:20px;white-space:pre-wrap;color:#d9d5ff;line-height:1.7}
-footer{text-align:center;color:#707991;padding:35px;font-size:12px}
+button{width:100%;padding:16px;border:0;border-radius:10px;background:#8b5cf6;color:white;font-size:16px;font-weight:bold}
+.options{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:15px 0}
+.option{padding:16px;border:2px solid #454d67;border-radius:12px;background:#090e1b;text-align:center;cursor:pointer}
+.option.active{border-color:#a78bfa;background:#21183b}
+.option small{display:block;color:#aeb5ca;margin-top:8px}
+#result{margin-top:20px;color:#d9d5ff;white-space:pre-wrap;line-height:1.7}
+.note{font-size:12px}
+footer{text-align:center;color:#707991;padding:30px}
 </style>
 </head>
 <body>
 <header><div class="logo">ZORTAX <span>CREATOR</span></div></header>
 <main>
-<h1>Videolarını kısa kesitlere dönüştür! 🚀</h1>
-<p>Uzun videolarından TikTok, Reels ve YouTube Shorts için kısa içerikler hazırla.</p>
+<h1>Videonu hazırla! 🚀</h1>
+<p>Türkçe videolarını TikTok, Reels ve Shorts formatına dönüştür.</p>
+
 <div class="panel">
 <h3>🎬 YouTube video bağlantısı</h3>
-<input id="url" placeholder="YouTube bağlantısını buraya yapıştır">
-<button id="btn" onclick="analyze()">Videoyu analiz et</button>
+<input id="url" placeholder="YouTube bağlantısını yapıştır">
+
+<h3>📝 Altyazı tercihi</h3>
+<div class="options">
+<div class="option active" id="yes" onclick="choose('yes')">
+<strong>Altyazılı</strong>
+<small>Türkçe altyazı</small>
+</div>
+<div class="option" id="no" onclick="choose('no')">
+<strong>Altyazısız</strong>
+<small>Yazısız video</small>
+</div>
+</div>
+
+<h3>📱 Video formatı</h3>
+<div class="option active">
+<strong>9:16 Dikey</strong>
+<small>TikTok / Reels / Shorts</small>
+</div>
+
+<br>
+<button onclick="prepare()">Videoyu hazırla 🚀</button>
 <div id="result"></div>
 </div>
-<p class="note">ZORTAX Creator – İlk sürüm 0.1</p>
+
+<p class="note">ZORTAX Creator – Sürüm 0.2</p>
 </main>
 <footer>© 2026 ZORTAX Creator</footer>
+
 <script>
-function analyze(){
-const url=document.getElementById('url').value.trim();
-const result=document.getElementById('result');
-if(!url.includes('youtube.com/')&&!url.includes('youtu.be/')){
-result.textContent='Geçerli bir YouTube bağlantısı gir knk!';
+let subtitle="yes";
+
+function choose(value){
+subtitle=value;
+document.getElementById("yes").classList.toggle("active",value==="yes");
+document.getElementById("no").classList.toggle("active",value==="no");
+}
+
+function prepare(){
+let url=document.getElementById("url").value.trim();
+let result=document.getElementById("result");
+
+if(!url.includes("youtube.com/")&&!url.includes("youtu.be/")){
+result.textContent="Geçerli bir YouTube bağlantısı gir knk!";
 return;
 }
-result.textContent='Bağlantı alındı! 🎉\\n\\nBu ilk sürüm henüz videoyu işleyemiyor. Otomatik kesit motorunu bir sonraki aşamada bağlayacağız.';
+
+result.textContent=
+"✅ Bağlantı alındı!\n"+
+"🌍 Dil: Türkçe\n"+
+"📱 Format: Dikey 9:16\n"+
+"📝 Altyazı: "+(subtitle==="yes"?"Açık":"Kapalı")+
+"\n\nArayüz hazır. Video işleme motoru henüz bağlanmadı.";
 }
 </script>
 </body>
