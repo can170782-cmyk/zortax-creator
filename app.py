@@ -4,7 +4,7 @@ import tempfile
 import subprocess
 import yt_dlp
 import imageio_ffmpeg
-
+from io import BytesIO
 from flask import Flask, request, send_file, jsonify
 from flask_cors import CORS
 
@@ -71,11 +71,17 @@ def process():
                 "-crf", "23", "-c:a", "aac",
                 "-movflags", "+faststart", cikis
             ], check=True)
+            
+with open(cikis, "rb") as f:
+    video_data = f.read()
 
-            return send_file(
-                cikis,
-                as_attachment=True,
-                download_name="ZORTAX_FINAL.mp4"
+return send_file(
+    
+    BytesIO(video_data),
+    mimetype="video/mp4",
+    as_attachment=True,
+    download_name="ZORTAX_FINAL.mp4"
+)
             )
 
         except Exception as e:
